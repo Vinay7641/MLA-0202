@@ -1,0 +1,6 @@
+from sklearn.tree import DecisionTreeClassifier
+X = [[0], [1], [0], [1]]
+y = [0, 1, 0, 1]
+model = DecisionTreeClassifier()
+model.fit(X, y)
+print('Prediction for 1:', model.predict([[1]]))
