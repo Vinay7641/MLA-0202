@@ -1,0 +1,13 @@
+from sklearn.linear_model import LinearRegression
+X = [[2018, 50000],
+    [2019, 40000],
+    [2020, 30000],
+    [2021, 20000],
+    [2022, 10000]]
+y = [800000, 900000, 1000000, 1150000, 1300000]
+model = LinearRegression()
+model.fit(X, y)
+year = int(input("Enter Car Year: "))
+km = int(input("Enter Kilometers Driven: "))
+price = model.predict([[year, km]])
+print("Predicted Car Price:", round(price[0], 2))
