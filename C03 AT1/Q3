@@ -1,0 +1,18 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA, FactorAnalysis, FastICA
+d = pd.read_csv("Wine_Dataset.csv")
+X = StandardScaler().fit_transform(d.drop("target", axis=1))
+y = d["target"]
+models = [
+    PCA(2),
+    FactorAnalysis(2, random_state=42),
+    FastICA(2, random_state=42, max_iter=1000)]
+for m in models:
+    x = m.fit_transform(X)
+    plt.scatter(x[:,0], x[:,1], c=y)
+    plt.title(type(m).__name__)
+    plt.show()
+p = PCA(2).fit(X)
+print("PCA Variance:", p.explained_variance_ratio_)
