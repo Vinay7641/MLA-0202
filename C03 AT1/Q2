@@ -1,0 +1,20 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from sklearn.mixture import GaussianMixture
+from sklearn.decomposition import PCA
+from sklearn.metrics import silhouette_score
+d = pd.read_csv("Digits_Dataset.csv")
+X = StandardScaler().fit_transform(d.drop("target", axis=1))
+k = KMeans(10, random_state=42, n_init=10).fit_predict(X)
+g = GaussianMixture(10, random_state=42).fit_predict(X)
+p = PCA(2).fit_transform(X)
+plt.scatter(p[:,0], p[:,1], c=k, s=8)
+plt.title("K-Means")
+plt.show()
+plt.scatter(p[:,0], p[:,1], c=g, s=8)
+plt.title("GMM using EM")
+plt.show()
+print("K-Means:", silhouette_score(X,k))
+print("GMM:", silhouette_score(X,g))
