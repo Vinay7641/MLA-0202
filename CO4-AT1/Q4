@@ -1,0 +1,34 @@
+import sklearn_crfsuite
+sentences = [
+    [("John", "CUSTOMER"), ("ordered", "O"), ("laptop", "PRODUCT"), ("order123", "ORDER")],
+    [("Alice", "CUSTOMER"), ("bought", "O"), ("phone", "PRODUCT"), ("order456", "ORDER")],
+    [("Bob", "CUSTOMER"), ("purchased", "O"), ("headphones", "PRODUCT"), ("order789", "ORDER")]
+]
+def features(sentence, i):
+    word = sentence[i][0]
+    return {
+        "word": word,
+        "lower": word.lower(),
+        "is_digit": word.isdigit(),
+        "prefix": word[:2],
+        "suffix": word[-2:]
+    }
+X = []
+y = []
+for sentence in sentences:
+    X.append([features(sentence, i) for i in range(len(sentence))])
+    y.append([label for word, label in sentence])
+crf = sklearn_crfsuite.CRF(
+    algorithm="lbfgs",
+    max_iterations=100
+)
+crf.fit(X, y)
+test = [
+    ("David", "O"),
+    ("ordered", "O"),
+    ("tablet", "O"),
+    ("order999", "O")]
+X_test = [[features(test, i) for i in range(len(test))]]
+prediction = crf.predict(X_test)[0]
+for word, label in zip(test, prediction):
+    print(word[0], "->", label)
