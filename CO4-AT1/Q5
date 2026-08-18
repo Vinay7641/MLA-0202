@@ -1,0 +1,22 @@
+import pandas as pd
+from pgmpy.models import DiscreteBayesianNetwork
+from pgmpy.inference import VariableElimination
+data = pd.read_csv("insurance.csv")
+model = DiscreteBayesianNetwork([
+    ("Age", "Claim"),
+    ("Income", "Claim"),
+    ("Vehicle", "Claim")
+])
+model.fit(data)
+print("Network Structure:")
+print(model.edges())
+infer = VariableElimination(model)
+result = infer.query(
+    variables=["Claim"],
+    evidence={
+        "Age": "Young",
+        "Income": "High",
+        "Vehicle": "Car"
+    })
+print("\nProbability of Insurance Claim:")
+print(result)
