@@ -1,0 +1,19 @@
+import numpy as np
+from hmmlearn.hmm import CategoricalHMM
+model = CategoricalHMM(n_components=3, random_state=42)
+model.startprob_ = np.array([0.5, 0.3, 0.2])
+model.transmat_ = np.array([
+    [0.7, 0.2, 0.1],
+    [0.3, 0.4, 0.3],
+    [0.2, 0.3, 0.5]
+])
+model.emissionprob_ = np.array([
+    [0.6, 0.3, 0.1],
+    [0.2, 0.5, 0.3],
+    [0.1, 0.3, 0.6]])
+observations = np.array([[0], [1], [2], [2], [1]])
+states = model.predict(observations)
+weather = ["Sunny", "Cloudy", "Rainy"]
+print("Predicted Weather:")
+for state in states:
+    print(weather[state])
