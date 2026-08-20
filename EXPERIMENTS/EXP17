@@ -1,0 +1,8 @@
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+data = pd.read_csv("mobile_price.csv")
+X = data[["RAM", "Storage", "Battery", "Camera"]]
+y = data["Price"]
+model = LinearRegression()
+model.fit(X, y)
+print("Predicted Price:", model.predict([[8, 256, 5000, 50]])[0])
