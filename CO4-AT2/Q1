@@ -17,8 +17,7 @@ c5 = TabularCPD(
         [0.01, 0.10, 0.15, 0.30, 0.20, 0.40, 0.50, 0.70,
          0.10, 0.30, 0.40, 0.60, 0.30, 0.50, 0.65, 0.85]],
     evidence=["Amount", "Location", "Device", "History"],
-    evidence_card=[2, 2, 2, 2]
-)
+    evidence_card=[2, 2, 2, 2])
 model.add_cpds(c1, c2, c3, c4, c5)
 print("Model Valid:", model.check_model())
 infer = VariableElimination(model)
