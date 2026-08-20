@@ -1,0 +1,15 @@
+from sklearn.ensemble import RandomForestRegressor
+X = [
+    [2,32,3000],
+    [3,64,3500],
+    [4,64,4000],
+    [6,128,4500],
+    [8,256,5000],
+    [12,256,5000]
+]
+y = [8000,10000,13000,18000,25000,35000]
+model = RandomForestRegressor(n_estimators=100, random_state=42)
+model.fit(X, y)
+mobile = [[8,256,5000]]
+print("Predicted Mobile Price:",
+      round(model.predict(mobile)[0], 2))
