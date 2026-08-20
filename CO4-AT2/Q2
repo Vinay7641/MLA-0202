@@ -1,0 +1,25 @@
+import numpy as np
+from hmmlearn.hmm import CategoricalHMM
+model = CategoricalHMM(n_components=3, random_state=42)
+model.startprob_ = np.array([0.7, 0.2, 0.1])
+model.transmat_ = np.array([
+    [0.8, 0.15, 0.05],
+    [0.2, 0.6, 0.2],
+    [0.05, 0.25, 0.7]
+])
+model.emissionprob_ = np.array([
+    [0.8, 0.15, 0.05],
+    [0.2, 0.6, 0.2],
+    [0.05, 0.25, 0.7]
+])
+observations = np.array([
+    [0],
+    [0],
+    [1],
+    [1],
+    [2]])
+states = model.predict(observations)
+names = ["Healthy", "Warning", "Failure"]
+print("Predicted Machine States:")
+for state in states:
+    print(names[state])
