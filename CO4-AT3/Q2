@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+from hmmlearn.hmm import CategoricalHMM
+data = pd.read_csv("vehicle_activity_data.csv")
+values = {
+    "Driving": 0,
+    "Braking": 1,
+    "Turning": 2,
+    "Stopping": 3}
+x = data["Activity"].map(values).values.reshape(-1, 1)
+model = CategoricalHMM(
+    n_components=4,
+    random_state=42
+)
+model.startprob_ = [0.5, 0.2, 0.2, 0.1]
+model.transmat_ = [
+    [0.7, 0.1, 0.1, 0.1],
+    [0.2, 0.6, 0.1, 0.1],
+    [0.3, 0.1, 0.5, 0.1],
+    [0.1, 0.2, 0.1, 0.6]]
+model.emissionprob_ = np.eye(4)
+states = model.predict(x[:20])
+names = ["Driving", "Braking", "Turning", "Stopping"]
+print("Predicted Activities:")
+for i in states:
+    print(names[i])
