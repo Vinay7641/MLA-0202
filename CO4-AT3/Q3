@@ -1,0 +1,24 @@
+import pandas as pd
+import networkx as nx
+import matplotlib.pyplot as plt
+data = pd.read_csv("financial_risk_data.csv")
+bn = nx.DiGraph([
+    ("Income", "Risk"),
+    ("CreditScore", "Risk"),
+    ("TransactionAmount", "Risk"),
+    ("PreviousRisk", "Risk")])
+mrf = nx.Graph([
+    ("Income", "Risk"),
+    ("CreditScore", "Risk"),
+    ("TransactionAmount", "Risk"),
+    ("PreviousRisk", "Risk")
+])
+print(data.head())
+plt.figure(figsize=(10, 4))
+plt.subplot(1, 2, 1)
+nx.draw(bn, with_labels=True, node_color="lightblue")
+plt.title("Bayesian Network")
+plt.subplot(1, 2, 2)
+nx.draw(mrf, with_labels=True, node_color="lightgreen")
+plt.title("Markov Random Field")
+plt.show()
