@@ -1,0 +1,18 @@
+import random
+V = {}
+alpha = 0.1
+gamma = 0.9
+for episode in range(100):
+    state = random.randint(0, 4)
+    for step in range(10):
+        next_state = random.randint(0, 4)
+        reward = random.choice([0, 1])
+        V.setdefault(state, 0)
+        V.setdefault(next_state, 0)
+        V[state] = V[state] + alpha * (
+            reward + gamma * V[next_state] - V[state]
+        )
+        state = next_state
+print("State Values:")
+for state, value in V.items():
+    print(state, ":", round(value, 3))
