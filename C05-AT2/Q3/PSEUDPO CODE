@@ -1,0 +1,28 @@
+START
+Define all robot states
+Define possible actions:
+    UP
+    DOWN
+    LEFT
+    RIGHT
+Initialize V(state) = 0 for all states
+Set discount factor = 0.9
+REPEAT
+    Set newV = V
+    FOR each state
+        FOR each possible action
+            Calculate:
+            Reward + discount × V(next state)
+        END FOR
+        newV(state) = maximum calculated value
+    END FOR
+    Calculate difference between V and newV
+    V = newV
+UNTIL difference < threshold
+FOR each state
+    Select action with highest value
+    Store action as policy[state]
+END FOR
+PRINT Value Function
+PRINT Optimal Policy
+END
