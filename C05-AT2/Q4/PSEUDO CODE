@@ -1,0 +1,21 @@
+START
+Initialize V(state) = 0 for all states
+Set learning_rate = 0.1
+Set discount_factor = 0.9
+FOR each game episode
+    Initialize current state
+    WHILE game is not finished
+        Observe reward
+        Observe next state
+        TD_error =
+            reward +
+            discount_factor × V(next_state)
+            - V(current_state)
+        V(current_state) =
+            V(current_state) +
+            learning_rate × TD_error
+        current_state = next_state
+    END WHILE
+END FOR
+PRINT state values
+END
