@@ -1,0 +1,21 @@
+START
+Set number_of_movies = 5
+Set epsilon = 0.1
+Initialize reward[movie] = 0
+Initialize count[movie] = 0
+FOR each user interaction
+    Generate random number
+    IF random number < epsilon
+        Select a random movie
+    ELSE
+        Select movie with highest reward estimate
+    END IF
+    Observe user reward
+    count[movie] = count[movie] + 1
+    reward[movie] =
+        reward[movie] +
+        (user_reward - reward[movie]) / count[movie]
+END FOR
+Find movie with highest reward estimate
+PRINT "Best Movie =", selected movie
+END
