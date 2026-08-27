@@ -1,0 +1,26 @@
+import random
+movies = 5
+epsilon = 0.1
+rewards = [0] * movies
+counts = [0] * movies
+for i in range(1000):
+    if random.random() < epsilon:
+        movie = random.randint(0, movies - 1)
+    else:
+        averages = [
+            rewards[j] / counts[j] if counts[j] > 0 else 0
+            for j in range(movies)
+        ]
+        movie = averages.index(max(averages))
+    reward = random.choice([0, 1])
+    counts[movie] += 1
+    rewards[movie] += reward
+averages = [
+    rewards[i] / counts[i] if counts[i] > 0 else 0
+    for i in range(movies)
+]
+best = averages.index(max(averages))
+print("Movie Rewards:", rewards)
+print("Movie Counts:", counts)
+print("Expected Rewards:", averages)
+print("Best Movie:", best + 1)
