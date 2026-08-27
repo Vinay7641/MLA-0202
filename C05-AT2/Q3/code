@@ -1,0 +1,32 @@
+import numpy as np
+grid = [
+    [0, 0, 0],
+    [0, -1, 0],
+    [0, 0, 10]
+]
+V = np.zeros((3, 3))
+actions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+for _ in range(50):
+    newV = V.copy()
+    for r in range(3):
+        for c in range(3):
+            if grid[r][c] == -1 or grid[r][c] == 10:
+                continue
+            values = []
+            for dr, dc in actions:
+                nr = r + dr
+                nc = c + dc
+                if 0 <= nr < 3 and 0 <= nc < 3:
+                    if grid[nr][nc] == -1:
+                        values.append(-10)
+                    elif grid[nr][nc] == 10:
+                        values.append(10)
+                    else:
+                        values.append(-1 + 0.9 * V[nr][nc])
+                else:
+                    values.append(-10)
+            newV[r][c] = max(values)
+    V = newV
+print("Optimal Value Function:")
+print(V)
+print("Goal Value:", V[2][2])
