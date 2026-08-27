@@ -1,0 +1,32 @@
+START
+Define all drone states
+Define possible actions:
+    UP
+    DOWN
+    LEFT
+    RIGHT
+Initialize a random policy
+Initialize V(state) = 0
+REPEAT
+    Policy Evaluation:
+    REPEAT
+        FOR each state
+            V(state) =
+                reward +
+                discount × V(next state)
+        END FOR
+    UNTIL values converge
+    Policy Improvement:
+    Set policy_stable = TRUE
+    FOR each state
+        old_action = current policy
+        Select action with highest expected value
+        Update policy[state]
+        IF old_action != new_action
+            policy_stable = FALSE
+        END IF
+    END FOR
+UNTIL policy_stable = TRUE
+PRINT "Optimal Policy"
+PRINT policy
+END
