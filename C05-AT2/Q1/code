@@ -1,0 +1,17 @@
+import random
+trials = 10000
+on_time = 0
+for i in range(trials):
+    traffic = random.choice(["Low", "Medium", "High"])
+    if traffic == "Low":
+        time = random.randint(20, 30)
+    elif traffic == "Medium":
+        time = random.randint(30, 45)
+    else:
+        time = random.randint(45, 60)
+    if time <= 40:
+        on_time += 1
+probability = on_time / trials
+print("On-Time Deliveries:", on_time)
+print("Total Trials:", trials)
+print("Estimated Probability:", probability)
