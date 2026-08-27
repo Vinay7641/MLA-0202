@@ -1,0 +1,19 @@
+START
+Set total_trials = 10000
+Set on_time = 0
+FOR i = 1 TO total_trials
+    Generate random traffic condition
+    IF traffic condition is Low
+        delivery_time = random value between 20 and 30
+    ELSE IF traffic condition is Medium
+        delivery_time = random value between 30 and 45
+    ELSE
+        delivery_time = random value between 45 and 60
+    END IF
+    IF delivery_time <= 40
+        on_time = on_time + 1
+    END IF
+END FOR
+probability = on_time / total_trials
+PRINT "Estimated Probability =", probability
+END
