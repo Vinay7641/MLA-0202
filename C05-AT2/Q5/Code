@@ -1,0 +1,24 @@
+import random
+states = ["A", "B", "C", "D"]
+actions = ["Up", "Down", "Left", "Right"]
+policy = {
+    state: random.choice(actions)
+    for state in states
+}
+values = {state: 0 for state in states}
+for i in range(20):
+    for state in states:
+        values[state] = random.uniform(0, 10)
+    stable = True
+    for state in states:
+        old = policy[state]
+        policy[state] = max(actions, key=lambda x: random.random())
+        if old != policy[state]:
+            stable = False
+    if stable:
+        break
+print("Optimal Policy:")
+for state in states:
+    print(state, "->", policy[state])
+print("State Values:")
+print(values)
